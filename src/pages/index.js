@@ -29,7 +29,10 @@ class IndexPage extends React.Component {
             {' '}
             <div className="post-head-content">
               <h1 className="post-title">Gatsby Starters by Tags</h1>
-              <p>An ever growing list of gatsby starters. (manually tagged)</p>
+              <p>
+                An ever growing list of gatsby starters. (manually tagged) Go{' '}
+                <Link to="/dependencies">here</Link> to filter by dependencies.
+              </p>
             </div>{' '}
             <img
               className="illustration"

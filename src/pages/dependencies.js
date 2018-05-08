@@ -35,7 +35,7 @@ class DependencyPage extends React.Component {
               <h1 className="post-title">Gatsby Starters by Dependency</h1>
               <p>
                 An ever growing list of gatsby starters. (gatsby-* dependencies
-                only)
+                only). Go <Link to="/">here</Link> to filter by manual tags.
               </p>
             </div>{' '}
             <img

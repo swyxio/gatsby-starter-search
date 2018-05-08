@@ -35,25 +35,22 @@ fs.readdir(srcFolder, function(err, files) {
       if (demo && count++ < 2) {
         webshot(demo, path.join(desFolder, `${stub}.png`), function(err) {
           // screenshot now saved
-          if (err) console.log('err', err)
+          if (err) console.log('err', fromPath, err)
         })
       }
       // *************** get details from github repo
-      if (repo && count++ < 2) {
+      const jsonpath = path.join(gitFolder, `${stub}.json`)
+      if (repo && !fs.existsSync(jsonpath) && count++ < 2) {
         getpkgjson(repo)
           .then(pkgjson => {
             const repodata = gh.getRepo(getUser(repo), getStub(repo))
             repodata.getDetails((err, res) => {
+              if (err) throw err
               pkgjson.repoMetadata = res
               var json = JSON.stringify(pkgjson)
-              fs.writeFile(
-                path.join(gitFolder, `${stub}.json`),
-                json,
-                'utf8',
-                err => {
-                  if (err) throw err
-                }
-              )
+              fs.writeFile(jsonpath, json, 'utf8', err => {
+                if (err) throw err
+              })
             })
           })
           .catch(err => console.error(err) || console.log(repo))

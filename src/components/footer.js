@@ -7,7 +7,10 @@ const footer = ({ siteTitle }) => (
     <span className="footer-border" />{' '}
     <div className="footer">
       {' '}
-      <span>Made with 💜 by swyx. Design from Jad Limcaco.</span>{' '}
+      <span>
+        Made with 💜 by swyx. Design from{' '}
+        <a href="https://designsystemsrepo.netlify.com/">Jad Limcaco</a>.
+      </span>{' '}
       <span className="coffee">
         <a target="_blank" href="https://twitter.com/swyx">
           Follow on Twitter

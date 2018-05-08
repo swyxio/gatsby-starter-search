@@ -15,7 +15,7 @@ const Header = ({ siteTitle }) => (
           href="/"
           title="Gatsby Starter Search"
         >
-          <img
+          {/* <img
             className="logo-lg"
             src="https://d33wubrfki0l68.cloudfront.net/d3b175cca4b3f55dad5444cad88e66451c0d078c/37a69/images/dsr-logo.svg"
             width="98"
@@ -26,7 +26,8 @@ const Header = ({ siteTitle }) => (
             src="https://d33wubrfki0l68.cloudfront.net/d478fbdcb6335e9cd4e31ba15262905ed04043db/5723f/images/dsr-logo-small.svg"
             width="143"
             height="36"
-          />
+          /> */}
+          Gatsby Starters
         </a>
         <button
           className="pull lines-button"
@@ -52,6 +53,14 @@ const Header = ({ siteTitle }) => (
             <Link activeClassName="active" to="/about/" title="About">
               About
             </Link>
+          </li>
+          <li>
+            <a
+              href="https://github.com/sw-yx/gatsby-starter-search"
+              title="About"
+            >
+              Github Source
+            </a>
           </li>
           <li>
             <a

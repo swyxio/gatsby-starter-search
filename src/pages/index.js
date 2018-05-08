@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'gatsby-link'
 
-class ToolsPage extends React.Component {
+class IndexPage extends React.Component {
   state = { currentTag: 'all' }
   toggleMode = tag => () => this.setState({ currentTag: tag })
   render() {
@@ -55,57 +55,74 @@ class ToolsPage extends React.Component {
           ))}
         </ul>
         <div className="post-content holder">
-          {tools.map(art => (
-            <a
-              className="block block-tools"
-              href={art.node.frontmatter.link}
-              title={art.node.frontmatter.title}
-              target="_blank"
-              key={art.node.fields.slug}
-            >
-              {' '}
-              <div className="img-wrap">
-                <img
-                  src={'/' + art.node.frontmatter.image}
-                  alt={art.node.frontmatter.title}
-                  width="800"
-                  height="400"
-                />
-              </div>{' '}
-              <div className="content">
+          {tools.map(art => {
+            const { demo, repo, features, tags, title } = art.node.frontmatter
+            const {
+              stub,
+              slug,
+              githubData,
+              description,
+              githubFullName,
+            } = art.node.fields
+            // console.log('art.node.fields', art.node.fields)
+            return (
+              <a
+                className="block block-tools"
+                // href={}
+                title={art.node.frontmatter.title}
+                target="_blank"
+                key={stub}
+              >
                 {' '}
-                <h2>{art.node.frontmatter.title}</h2>{' '}
-                <p className="clamp">{art.node.frontmatter.description}</p>{' '}
-              </div>{' '}
-            </a>
-          ))}
+                <div className="img-wrap">
+                  <img
+                    src={`/images/_starters/${stub}.png`}
+                    alt={repo}
+                    width="800"
+                    height="400"
+                  />
+                </div>{' '}
+                <div className="content">
+                  {' '}
+                  <h2>{githubFullName}</h2>{' '}
+                  <p className="clamp">{description}</p>{' '}
+                </div>{' '}
+              </a>
+            )
+          })}
         </div>
       </article>
     )
   }
 }
 
-export default ToolsPage
+export default IndexPage
 
 export const pageQuery = graphql`
-  query ToolsQuery {
-    allMarkdownRemark(
-      filter: { id: { regex: "/_starters/" } }
-      sort: { fields: [fields___date], order: DESC }
-    ) {
+  query indexQuery {
+    allMarkdownRemark {
       edges {
         node {
           frontmatter {
-            date
             demo
             repo
-            features
-            description
             tags
+            features
           }
           fields {
-            slug
-            date
+            stub
+            lastUpdated
+            description
+            githubFullName
+            owner {
+              avatar_url
+            }
+            githubData {
+              repoMetadata {
+                full_name
+              }
+            }
+            stars
           }
         }
       }

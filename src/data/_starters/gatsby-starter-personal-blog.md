@@ -7,8 +7,8 @@ tags:
 - blog
 - markdown
 - algolia
-- netlifyform
-- material
+- Netlify Form
+- Styling:Material
 features:
 - Ready to use, but easily customizable a fully equipped theme starter
 - Easy editable content in Markdown files (posts, pages and parts)

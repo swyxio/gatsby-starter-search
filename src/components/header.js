@@ -9,10 +9,10 @@ const Header = ({ siteTitle }) => (
   <header className="site-header" role="banner">
     <div className="wrapper">
       <div className="header-inner">
-        <a
+        <Link
           className="site-title"
           rel="author"
-          href="/"
+          to="/"
           title="Gatsby Starter Search"
         >
           {/* <img
@@ -28,7 +28,7 @@ const Header = ({ siteTitle }) => (
             height="36"
           /> */}
           Gatsby Starters
-        </a>
+        </Link>
         <button
           className="pull lines-button"
           type="button"
@@ -40,15 +40,15 @@ const Header = ({ siteTitle }) => (
       </div>
       <nav className="responsive-nav">
         <ul className="nav">
-          {/* <li>
+          <li>
             <Link
               activeClassName="active"
-              to="/design-systems/"
-              title="Design Systems Gallery"
+              to="/dependencies/"
+              title="Filter by dependencies"
             >
-              Gatsby Starters
+              Dependencies
             </Link>
-          </li> */}
+          </li>
           <li>
             <Link activeClassName="active" to="/about/" title="About">
               About

@@ -4,7 +4,7 @@ demo: https://vagr9k.github.io/gatsby-material-starter/
 repo: https://github.com/Vagr9K/gatsby-material-starter
 description: n/a
 tags:
-- material
+- Styling:Material
 features:
 - React-MD for Material design
 - Sass/SCSS

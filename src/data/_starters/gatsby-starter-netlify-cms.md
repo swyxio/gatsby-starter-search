@@ -5,8 +5,8 @@ repo: https://github.com/AustinGreen/gatsby-starter-netlify-cms
 description: n/a
 tags:
 - blog
-- bulma
-- netlifycms
+- Styling:Bulma
+- netlifyCMS
 features:
 - A simple blog built with Netlify CMS
 - Basic directory organization

@@ -4,7 +4,7 @@ demo: https://haysclark.github.io/gatsby-starter-casper/
 repo: https://github.com/haysclark/gatsby-starter-casper
 description: n/a
 tags:
-- notag
+- PWA
 features:
 - Page pagination
 - CSS

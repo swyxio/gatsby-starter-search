@@ -4,7 +4,7 @@ demo: https://prototypeinteractive.github.io/gatsby-react-boilerplate/
 repo: https://github.com/PrototypeInteractive/gatsby-react-boilerplate
 description: n/a
 tags:
-- bootstrap
+- Styling:Bootstrap
 features:
 - Basic configuration and folder structure
 - Uses PostCSS and Sass (with autoprefixer and pixrem)

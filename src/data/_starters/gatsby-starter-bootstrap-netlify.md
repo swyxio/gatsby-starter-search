@@ -4,8 +4,8 @@ demo: https://gatsby-starter-bootstrap-netlify.netlify.com/
 repo: https://github.com/konsumer/gatsby-starter-bootstrap-netlify
 description: n/a
 tags:
-- bootstrap
-- netlifycms
+- Styling:Bootstrap
+- netlifyCMS
 features:
 - Very similar to gatsby-starter-netlify-cms, slightly more configurable (eg set site-title in gatsby-config) with Bootstrap/Bootswatch instead of bulma
 ---

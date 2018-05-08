@@ -5,7 +5,7 @@ repo: https://github.com/ericwindmill/gatsby-starter-docs
 description: n/a
 tags:
 - documentation
-- styled-components
+- Styling:CSS-in-JS
 features:
 - All the features from gatsby-advanced-starter, plus
 - Designed for Documentation / Tutorial Websites

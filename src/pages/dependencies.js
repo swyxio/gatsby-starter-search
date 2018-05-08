@@ -1,8 +1,8 @@
 import React from 'react'
 import Link from 'gatsby-link'
 
-class IndexPage extends React.Component {
-  state = { currentTag: 'official', sortMode: 'stars' }
+class DependencyPage extends React.Component {
+  state = { currentTag: 'all', sortMode: 'stars' }
   toggleMode = tag => () => this.setState({ currentTag: tag })
   toggleSort = mode => () => this.setState({ sortMode: mode })
   render() {
@@ -14,22 +14,29 @@ class IndexPage extends React.Component {
     let tags = new Set()
     edges.forEach(
       ({ node }) =>
-        node.frontmatter.tags &&
-        node.frontmatter.tags.forEach(tag => tags.add(tag))
+        node.fields.gatsbyDependencies &&
+        node.fields.gatsbyDependencies.forEach(([tag, _]) => tags.add(tag))
     )
     tags = Array.from(tags).sort((a, b) => a.localeCompare(b))
     const tools =
       currentTag === 'all'
         ? edges
-        : edges.filter(edge => edge.node.frontmatter.tags.includes(currentTag))
+        : edges.filter(edge =>
+            edge.node.fields.gatsbyDependencies.some(arr =>
+              arr.includes(currentTag)
+            )
+          )
     return (
       <article className="post post-tools" style={{ padding: '0px 20px' }}>
         <header className="post-header clearfix">
           <div className="post-head-wrap">
             {' '}
             <div className="post-head-content">
-              <h1 className="post-title">Gatsby Starters by Tags</h1>
-              <p>An ever growing list of gatsby starters. (manually tagged)</p>
+              <h1 className="post-title">Gatsby Starters by Dependency</h1>
+              <p>
+                An ever growing list of gatsby starters. (gatsby-* dependencies
+                only)
+              </p>
             </div>{' '}
             <img
               className="illustration"
@@ -63,7 +70,7 @@ class IndexPage extends React.Component {
           {tags.map(tag => (
             <li key={tag} className={tag === currentTag && 'active'}>
               <a onClick={this.toggleMode(tag)}>
-                <span className="number">{capitalizeFirstLetter(tag)}</span>
+                <span className="number">{tag}</span>
               </a>
             </li>
           ))}
@@ -94,7 +101,6 @@ class IndexPage extends React.Component {
                 githubFullName,
                 lastUpdated,
                 stars,
-                // allDependencies,
               } = art.node.fields
               // console.log({ allDependencies })
               // console.log('art.node.fields', art.node.fields)
@@ -133,10 +139,10 @@ class IndexPage extends React.Component {
   }
 }
 
-export default IndexPage
+export default DependencyPage
 
 export const pageQuery = graphql`
-  query indexQuery {
+  query depQuery {
     allMarkdownRemark {
       edges {
         node {
@@ -151,6 +157,7 @@ export const pageQuery = graphql`
             lastUpdated
             description
             githubFullName
+            gatsbyDependencies
             owner {
               avatar_url
             }
@@ -167,9 +174,9 @@ export const pageQuery = graphql`
   }
 `
 
-function capitalizeFirstLetter(string) {
-  return string
-    .split('-')
-    .map(str => str.charAt(0).toUpperCase() + str.slice(1))
-    .join(' ')
-}
+// function capitalizeFirstLetter(string) {
+//   return string
+//     .split('-')
+//     .map(str => str.charAt(0).toUpperCase() + str.slice(1))
+//     .join(' ')
+// }

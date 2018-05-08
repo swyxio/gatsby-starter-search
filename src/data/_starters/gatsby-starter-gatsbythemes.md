@@ -4,7 +4,7 @@ demo: https://themes.gatsbythemes.com/gatsby-starter/
 repo: https://github.com/saschajullmann/gatsby-starter-gatsbythemes
 description: n/a
 tags:
-- emotion
+- Styling:CSS-in-JS
 - blog
 features:
 - CSS-in-JS via Emotion.

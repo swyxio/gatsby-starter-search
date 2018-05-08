@@ -34,7 +34,7 @@ exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
       value: ghdata,
     })
     // make extra fields for ease of use. totally optional really
-    const { repoMetadata } = ghdata
+    const { repoMetadata, dependencies = [], devDependencies = [] } = ghdata
     createNodeField({ node, name: `description`, value: ghdata.description })
     createNodeField({
       node,
@@ -52,40 +52,63 @@ exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
       name: `githubFullName`,
       value: repoMetadata.full_name,
     })
+    // if (!dependencies.concat) console.log({ dependencies })
+    const allDependencies = Object.entries(dependencies).concat(
+      Object.entries(devDependencies)
+    )
+    createNodeField({
+      node,
+      name: `allDependencies`,
+      value: allDependencies,
+    })
+    createNodeField({
+      node,
+      name: `gatsbyDependencies`,
+      value: allDependencies
+        .filter(
+          ([key, _]) => !['gatsby', 'gatsby-cli', 'gatsby-link'].includes(key)
+        )
+        .filter(([key, _]) => key.includes('gatsby')),
+    })
+    createNodeField({
+      node,
+      name: `miscDependencies`,
+      value: allDependencies.filter(([key, _]) => !key.includes('gatsby')),
+    })
   }
 }
 
-// exports.createPages = ({ boundActionCreators, graphql }) => {
-//   const { createPage } = boundActionCreators
-//   const DSTemplate = path.resolve(`src/templates/design-systems.js`)
-//   return graphql(`
-//     {
-//       allMarkdownRemark(
-//         sort: { order: DESC, fields: [frontmatter___date] }
-//         limit: 1000
-//       ) {
-//         edges {
-//           node {
-//             fields {
-//               slug
-//             }
-//           }
-//         }
-//       }
-//     }
-//   `).then(result => {
-//     if (result.errors) {
-//       return Promise.reject(result.errors)
-//     }
+exports.createPages = ({ boundActionCreators, graphql }) => {
+  const { createPage } = boundActionCreators
+  const DSTemplate = path.resolve(`src/templates/starter-page.js`)
+  return graphql(`
+    {
+      allMarkdownRemark(
+        sort: { order: DESC, fields: [frontmatter___date] }
+        limit: 1000
+      ) {
+        edges {
+          node {
+            fields {
+              slug
+            }
+          }
+        }
+      }
+    }
+  `).then(result => {
+    if (result.errors) {
+      return Promise.reject(result.errors)
+    }
 
-//     result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-//       createPage({
-//         path: node.fields.slug,
-//         component: DSTemplate,
-//         context: {
-//           slug: node.fields.slug,
-//         }, // additional data can be passed via context
-//       })
-//     })
-//   })
-// }
+    result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+      createPage({
+        path: node.fields.slug,
+        component: DSTemplate,
+        context: {
+          slug: node.fields.slug,
+        }, // additional data can be passed via context
+      })
+    })
+  })
+}
